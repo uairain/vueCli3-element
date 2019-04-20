@@ -32,11 +32,3 @@ npm run test:unit
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### 开发工具
-vsCode
-
-
-### vsCode插件
-eslint || vetur
-# vueCli3-element
