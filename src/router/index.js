@@ -24,6 +24,7 @@ const introduction = () => import(/* webpackChunkName: 'introduction' */ 'views/
  * noDropdown : if `noDropdown:true` will has no submenu
  * meta : { role: ['admin'] }  will control the page role
  **/
+
 export const constantRouterMap = [{
   path: '/login',
   component: login,
@@ -70,7 +71,7 @@ export const constantRouterMap = [{
 ]
 
 export default new Router({
-  // mode: 'history', //后端支持可开
+  mode: 'history', // 后端支持可开
   scrollBehavior: () => ({
     y: 0
   }),

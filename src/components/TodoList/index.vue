@@ -2,29 +2,47 @@
   <section class="todoapp">
     <!-- header -->
     <header class="header">
-      <input class="new-todo" autofocus autocomplete="off" placeholder="TODO LIST?" @keyup.enter="addTodo">
+      <input class="new-todo"
+             autofocus
+             autocomplete="off"
+             placeholder="TODO LIST?"
+             @keyup.enter="addTodo">
     </header>
     <!-- main section -->
-    <section class="main" v-show="todos.length">
-      <input class="toggle-all" id="toggle-all" type="checkbox" :checked="allChecked" @change="toggleAll({ done: !allChecked })">
+    <section class="main"
+             v-show="todos.length">
+      <input class="toggle-all"
+             id="toggle-all"
+             type="checkbox"
+             :checked="allChecked"
+             @change="toggleAll({ done: !allChecked })">
       <label for="toggle-all"></label>
       <ul class="todo-list">
-        <todo @toggleTodo='toggleTodo' @editTodo='editTodo' @deleteTodo='deleteTodo' v-for="(todo, index) in filteredTodos" :key="index"
-          :todo="todo"></todo>
+        <todo @toggleTodo='toggleTodo'
+              @editTodo='editTodo'
+              @deleteTodo='deleteTodo'
+              v-for="(todo, index) in filteredTodos"
+              :key="index"
+              :todo="todo"></todo>
       </ul>
     </section>
     <!-- footer -->
-    <footer class="footer" v-show="todos.length">
+    <footer class="footer"
+            v-show="todos.length">
       <span class="todo-count">
         <strong>{{ remaining }}</strong>
         {{ remaining | pluralize('item') }} left
       </span>
       <ul class="filters">
-        <li v-for="(val, key) in filters" :key="key">
-          <a :class="{ selected: visibility === key }" @click.prevent="visibility = key">{{ key | capitalize }}</a>
+        <li v-for="(val, key) in filters"
+            :key="key">
+          <a :class="{ selected: visibility === key }"
+             @click.prevent="visibility = key">{{ key | capitalize }}</a>
         </li>
       </ul>
-      <button class="clear-completed" v-show="todos.length > remaining" @click="clearCompleted">
+      <button class="clear-completed"
+              v-show="todos.length > remaining"
+              @click="clearCompleted">
         Clear completed
       </button>
     </footer>
@@ -44,6 +62,7 @@ const defalutList = [
   { text: 'fork this repository', done: false },
   { text: 'follow author', done: false }
 ]
+
 export default {
   components: { Todo },
   data() {
@@ -70,6 +89,7 @@ export default {
     },
     addTodo(e) {
       const text = e.target.value
+
       if (text.trim()) {
         this.todos.push({
           text,
@@ -112,5 +132,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './index.scss';
+@import "./index.scss";
 </style>

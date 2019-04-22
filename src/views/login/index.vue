@@ -64,6 +64,7 @@ export default {
         callback()
       }
     }
+
     return {
       loginForm: {
         username: 'admin',
@@ -181,6 +182,7 @@ export default {
   height: 100vh;
   background-color: #2d3a4b;
   input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #293444 inset !important;
     -webkit-box-shadow: 0 0 0 1000px #293444 inset !important;
     -webkit-text-fill-color: #fff !important;
   }

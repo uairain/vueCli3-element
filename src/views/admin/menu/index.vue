@@ -130,6 +130,7 @@ import {
 } from 'api/admin/menu/index'
 import { mapGetters } from 'vuex'
 const menuElement = () => import(/* webpackChunkName: 'comElement' */ './components/element')
+
 export default {
   name: 'menu',
   components: {
@@ -196,7 +197,9 @@ export default {
       })
     },
     filterNode(value, data) {
-      if (!value) return true
+      if (!value) {
+        return true
+      }
       return data.label.indexOf(value) !== -1
     },
     getNodeData(data) {

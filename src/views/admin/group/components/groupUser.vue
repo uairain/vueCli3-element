@@ -104,8 +104,13 @@ export default {
     },
     onSubmit() {
       const vals = {}
-      if (this.members.length > 0) vals.members = this.members.join()
-      if (this.leaders.length > 0) vals.leaders = this.leaders.join()
+
+      if (this.members.length > 0) {
+        vals.members = this.members.join()
+      }
+      if (this.leaders.length > 0) {
+        vals.leaders = this.leaders.join()
+      }
       modifyUsers(this.groupId, vals).then(() => {
         this.$emit('closeUserDialog')
         this.$notify({
@@ -121,6 +126,7 @@ export default {
         this.lItems = response.data.leaders
         this.mItems = response.data.members
         const mems = []; const leas = []
+
         for (let i = 0; i < response.data.members.length; i++) {
           mems.push(response.data.members[i].id)
         }

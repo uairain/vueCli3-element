@@ -75,6 +75,7 @@ const user = {
       commit
     }, userInfo) {
       const username = userInfo.username.trim()
+
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
       commit('SET_MENUS', undefined)
@@ -99,16 +100,19 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
           const data = response
+
           commit('SET_ROLES', 'admin')
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', 'http://git.oschina.net/uploads/42/547642_geek_qi.png?1499487420')
           commit('SET_INTRODUCTION', data.description)
           const menus = {}
+
           for (let i = 0; i < data.menus.length; i++) {
             menus[data.menus[i].code] = true
           }
           commit('SET_MENUS', menus)
           const elements = {}
+
           for (let i = 0; i < data.elements.length; i++) {
             elements[data.elements[i].code] = true
           }
@@ -125,21 +129,21 @@ const user = {
     },
 
     // 第三方验证登录
-    LoginByThirdparty({
-      commit,
-      state
-    }, code) {
-      return new Promise((resolve, reject) => {
-        commit('SET_CODE', code)
-        loginByThirdparty(state.status, state.email, state.code).then(response => {
-          commit('SET_TOKEN', response.data.token)
-          setToken(response.data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
+    // LoginByThirdparty({
+    //   commit,
+    //   state
+    // }, code) {
+    //   return new Promise((resolve, reject) => {
+    //     commit('SET_CODE', code)
+    //     loginByThirdparty(state.status, state.email, state.code).then(response => {
+    //       commit('SET_TOKEN', response.data.token)
+    //       setToken(response.data.token)
+    //       resolve()
+    //     }).catch(error => {
+    //       reject(error)
+    //     })
+    //   })
+    // },
 
     // 登出
     LogOut({

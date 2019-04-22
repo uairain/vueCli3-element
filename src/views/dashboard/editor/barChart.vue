@@ -7,6 +7,7 @@
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts 主题
 const animationDuration = 3000
+
 export default {
   props: {
     className: {

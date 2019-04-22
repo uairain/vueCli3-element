@@ -69,23 +69,23 @@ export default {
     _startVal() {
       if (this.setStartVal) {
         return this.setStartVal
-      } else {
-        return 0
       }
+      return 0
+
     },
     _endVal() {
       if (this.setEndVal) {
         return this.setEndVal
-      } else {
-        return 0
       }
+      return 0
+
     },
     _duration() {
       if (this.setDuration) {
         return this.setDuration
-      } else {
-        return 100
       }
+      return 100
+
     },
     _decimals() {
       if (this.setDecimals) {
@@ -94,9 +94,9 @@ export default {
           return 0
         }
         return this.setDecimals
-      } else {
-        return 0
       }
+      return 0
+
     },
     _separator() {
       return this.setSeparator

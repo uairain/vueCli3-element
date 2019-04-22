@@ -1,5 +1,7 @@
 const vueSticky = {}
+
 let listenAction
+
 vueSticky.install = Vue => {
   Vue.directive('sticky', {
     inserted(el, binding) {
@@ -18,10 +20,12 @@ vueSticky.install = Vue => {
       // }
       const elHeight = el.getBoundingClientRect().height
       const elWidth = el.getBoundingClientRect().width
+
       elStyle.cssText = `top: ${stickyTop}px; z-index: ${zIndex}`
 
       const parentElm = el.parentNode || document.documentElement
       const placeholder = document.createElement('div')
+
       placeholder.style.display = 'none'
       placeholder.style.width = `${elWidth}px`
       placeholder.style.height = `${elHeight}px`
@@ -32,7 +36,9 @@ vueSticky.install = Vue => {
       const getScroll = (target, top) => {
         const prop = top ? 'pageYOffset' : 'pageXOffset'
         const method = top ? 'scrollTop' : 'scrollLeft'
+
         let ret = target[prop]
+
         if (typeof ret !== 'number') {
           ret = window.document.documentElement[method]
         }
@@ -66,14 +72,14 @@ vueSticky.install = Vue => {
       const check = () => {
         const scrollTop = getScroll(window, true)
         const offsetTop = el.getBoundingClientRect().top
+
         if (offsetTop < stickyTop) {
           sticky()
-        } else {
-          if (scrollTop < elHeight + stickyTop) {
-            reset()
-          }
+        } else if (scrollTop < elHeight + stickyTop) {
+          reset()
         }
       }
+
       listenAction = () => {
         check()
       }

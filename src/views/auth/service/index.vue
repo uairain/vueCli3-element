@@ -356,6 +356,7 @@ export default {
             duration: 2000
           })
           const index = this.list.indexOf(row)
+
           this.list.splice(index, 1)
         })
       })
@@ -372,6 +373,7 @@ export default {
     },
     create(formName) {
       const set = this.$refs
+
       set[formName].validate(valid => {
         if (valid) {
           addObj(this.form).then(() => {
@@ -392,10 +394,12 @@ export default {
     cancel(formName) {
       this.dialogFormVisible = false
       const set = this.$refs
+
       set[formName].resetFields()
     },
     update(formName) {
       const set = this.$refs
+
       set[formName].validate(valid => {
         if (valid) {
           this.dialogFormVisible = false

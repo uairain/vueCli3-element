@@ -16,9 +16,13 @@ export default {
     const { name } = param2Obj(config.url)
     const mockNameList = NameList.filter(item => {
       const lowerCaseName = item.name.toLowerCase()
-      if (name && lowerCaseName.indexOf(name.toLowerCase()) < 0) return false
+
+      if (name && lowerCaseName.indexOf(name.toLowerCase()) < 0) {
+        return false
+      }
       return true
     })
+
     return { items: mockNameList }
   }
 }

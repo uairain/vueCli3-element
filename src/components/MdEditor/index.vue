@@ -46,7 +46,9 @@ export default {
   },
   watch: {
     value(val) {
-      if (val === this.simplemde.value() && !this.hasChange) return
+      if (val === this.simplemde.value() && !this.hasChange) {
+        return
+      }
       this.simplemde.value(val)
     }
   },

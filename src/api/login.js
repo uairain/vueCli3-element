@@ -5,6 +5,7 @@ export function loginByEmail(username, password) {
     username,
     password
   }
+
   return fetch({
     url: '/api/auth/jwt/token',
     method: 'post',

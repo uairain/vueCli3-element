@@ -104,40 +104,74 @@
           </el-button>
         </template>
 
-</el-table-column>
-  </el-table>
-  <div v-show="!listLoading" class="pagination-container">
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total"> </el-pagination>
-  </div>
-  <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-    <el-form :model="form" :rules="rules" ref="form" label-width="100px">
-      <el-form-item label="资源编码" prop="code">
-        <el-input v-model="form.code" placeholder="请输入资源编码"></el-input>
-      </el-form-item>
-      <el-form-item label="资源类型" prop="type">
-         <el-select class="filter-item" v-model="form.type" placeholder="请输入资源类型">
-          <el-option v-for="item in  typeOptions" :key="item" :label="item" :value="item"> </el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="资源名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入资源名称"></el-input>
-      </el-form-item>
-      <el-form-item label="资源地址" prop="uri">
-        <el-input v-model="form.uri" placeholder="请输入资源地址"></el-input>
-      </el-form-item>
-      <el-form-item label="资源请求类型" prop="method">
-        <el-select class="filter-item" v-model="form.method" placeholder="请输入资源请求类型">
-          <el-option v-for="item in  methodOptions" :key="item" :label="item" :value="item"> </el-option>
-        </el-select>
-      </el-form-item>
-    </el-form>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="cancel('form')">取 消</el-button>
-      <el-button v-if="dialogStatus=='create'" type="primary" @click="create('form')">确 定</el-button>
-      <el-button v-else type="primary" @click="update('form')">确 定</el-button>
+      </el-table-column>
+    </el-table>
+    <div v-show="!listLoading"
+         class="pagination-container">
+      <el-pagination @size-change="handleSizeChange"
+                     @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.page"
+                     :page-sizes="[10,20,30, 50]"
+                     :page-size="listQuery.limit"
+                     layout="total, sizes, prev, pager, next, jumper"
+                     :total="total"> </el-pagination>
     </div>
-  </el-dialog>
-</div>
+    <el-dialog :title="textMap[dialogStatus]"
+               :visible.sync="dialogFormVisible">
+      <el-form :model="form"
+               :rules="rules"
+               ref="form"
+               label-width="100px">
+        <el-form-item label="资源编码"
+                      prop="code">
+          <el-input v-model="form.code"
+                    placeholder="请输入资源编码"></el-input>
+        </el-form-item>
+        <el-form-item label="资源类型"
+                      prop="type">
+          <el-select class="filter-item"
+                     v-model="form.type"
+                     placeholder="请输入资源类型">
+            <el-option v-for="item in  typeOptions"
+                       :key="item"
+                       :label="item"
+                       :value="item"> </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="资源名称"
+                      prop="name">
+          <el-input v-model="form.name"
+                    placeholder="请输入资源名称"></el-input>
+        </el-form-item>
+        <el-form-item label="资源地址"
+                      prop="uri">
+          <el-input v-model="form.uri"
+                    placeholder="请输入资源地址"></el-input>
+        </el-form-item>
+        <el-form-item label="资源请求类型"
+                      prop="method">
+          <el-select class="filter-item"
+                     v-model="form.method"
+                     placeholder="请输入资源请求类型">
+            <el-option v-for="item in  methodOptions"
+                       :key="item"
+                       :label="item"
+                       :value="item"> </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+        <el-button @click="cancel('form')">取 消</el-button>
+        <el-button v-if="dialogStatus=='create'"
+                   type="primary"
+                   @click="create('form')">确 定</el-button>
+        <el-button v-else
+                   type="primary"
+                   @click="update('form')">确 定</el-button>
+      </div>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -317,12 +351,14 @@ export default {
             duration: 2000
           })
           const index = this.list.indexOf(row)
+
           this.list.splice(index, 1)
         })
       })
     },
     create(formName) {
       const set = this.$refs
+
       this.form.menuId = this.menuId
       set[formName].validate(valid => {
         if (valid) {
@@ -344,10 +380,12 @@ export default {
     cancel(formName) {
       this.dialogFormVisible = false
       const set = this.$refs
+
       set[formName].resetFields()
     },
     update(formName) {
       const set = this.$refs
+
       this.form.menuId = this.menuId
       set[formName].validate(valid => {
         if (valid) {

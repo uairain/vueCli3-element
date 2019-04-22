@@ -6,13 +6,18 @@ export function parseTime(time, cFormat) {
   if (arguments.length === 0) {
     return null
   }
+  let newTime = time
   const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+
   let date
-  if (typeof time === 'object') {
-    date = time
+
+  if (typeof newTime === 'object') {
+    date = newTime
   } else {
-    if (('' + time).length === 10) time = parseInt(time) * 1000
-    date = new Date(time)
+    if ((String(newTime)).length === 10) {
+      newTime = parseInt(newTime) * 1000
+    }
+    date = new Date(newTime)
   }
   const formatObj = {
     y: date.getFullYear(),
@@ -25,18 +30,22 @@ export function parseTime(time, cFormat) {
   }
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
-    if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+
+    if (key === 'a') {
+      return ['一', '二', '三', '四', '五', '六', '日'][value - 1]
+    }
     if (result.length > 0 && value < 10) {
       value = '0' + value
     }
     return value || 0
   })
+
   return time_str
 }
 
 export function formatTime(time, option) {
-  time = +time * 1000
-  const d = new Date(time)
+  let newTime = Number(time) * 1000
+  const d = new Date(newTime)
   const now = Date.now()
 
   const diff = (now - d) / 1000
@@ -51,21 +60,24 @@ export function formatTime(time, option) {
     return '1天前'
   }
   if (option) {
-    return parseTime(time, option)
-  } else {
-    return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
+    return parseTime(newTime, option)
   }
+  return d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
+
 }
 
 // 格式化时间
 export function getQueryObject(url) {
-  url = url == null ? window.location.href : url
-  const search = url.substring(url.lastIndexOf('?') + 1)
+  let new_Url = url === null ? window.location.href : url
+  const search = url.substring(new_Url.lastIndexOf('?') + 1)
   const obj = {}
   const reg = /([^?&=]+)=([^?&=]*)/g
+
   search.replace(reg, (rs, $1, $2) => {
     const name = decodeURIComponent($1)
+
     let val = decodeURIComponent($2)
+
     val = String(val)
     obj[name] = val
     return rs
@@ -80,16 +92,22 @@ export function getQueryObject(url) {
  */
 export function getByteLen(val) {
   let len = 0
+
+  let new_val = val
+
   for (let i = 0; i < val.length; i++) {
-    if (val[i].match(/[^\x00-\xff]/ig) != null) {
+    if (new_val[i].match(/[^\x00-\xff]/ig) !== null) {
       len += 1
-    } else { len += 0.5 }
+    } else {
+      len += 0.5
+    }
   }
   return Math.floor(len)
 }
 
 export function cleanArray(actual) {
   const newArray = []
+
   for (let i = 0; i < actual.length; i++) {
     if (actual[i]) {
       newArray.push(actual[i])
@@ -99,9 +117,13 @@ export function cleanArray(actual) {
 }
 
 export function param(json) {
-  if (!json) return ''
+  if (!json) {
+    return ''
+  }
   return cleanArray(Object.keys(json).map(key => {
-    if (json[key] === undefined) return ''
+    if (json[key] === undefined) {
+      return ''
+    }
     return encodeURIComponent(key) + '=' +
       encodeURIComponent(json[key])
   })).join('&')
@@ -109,14 +131,16 @@ export function param(json) {
 
 export function param2Obj(url) {
   const search = url.split('?')[1]
+
   if (!search) {
     return {}
   }
-  return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+  return JSON.parse('{"' + decodeURIComponent(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/\=/g, '":"') + '"}')
 }
 
 export function html2Text(val) {
   const div = document.createElement('div')
+
   div.innerHTML = val
   return div.textContent || div.innerText
 }
@@ -124,9 +148,10 @@ export function html2Text(val) {
 export function objectMerge(target, source) {
   /* Merges two  objects,
    giving the last one precedence */
+  let new_target = target
 
   if (typeof target !== 'object') {
-    target = {}
+    new_target = {}
   }
   if (Array.isArray(source)) {
     return source.slice()
@@ -134,24 +159,30 @@ export function objectMerge(target, source) {
   for (const property in source) {
     if (source.hasOwnProperty(property)) {
       const sourceProperty = source[property]
+
       if (typeof sourceProperty === 'object') {
-        target[property] = objectMerge(target[property], sourceProperty)
+        new_target[property] = objectMerge(new_target[property], sourceProperty)
         continue
       }
-      target[property] = sourceProperty
+      new_target[property] = sourceProperty
     }
   }
-  return target
+  return new_target
 }
 
 export function scrollTo(element, to, duration) {
-  if (duration <= 0) return
+  if (duration <= 0) {
+    return
+  }
   const difference = to - element.scrollTop
   const perTick = difference / duration * 10
+
   setTimeout(() => {
     console.log(new Date())
     element.scrollTop = element.scrollTop + perTick
-    if (element.scrollTop === to) return
+    if (element.scrollTop === to) {
+      return
+    }
     scrollTo(element, to, duration - 10)
   }, 10)
 }
@@ -162,8 +193,9 @@ export function toggleClass(element, className) {
   }
   let classString = element.className
   const nameIndex = classString.indexOf(className)
+
   if (nameIndex === -1) {
-    classString += '' + className
+    classString += String(className)
   } else {
     classString = classString.substr(0, nameIndex) + classString.substr(nameIndex + className.length)
   }
@@ -176,6 +208,7 @@ export const pickerOptions = [
     onClick(picker) {
       const end = new Date()
       const start = new Date(new Date().toDateString())
+
       end.setTime(start.getTime())
       picker.$emit('pick', [start, end])
     }
@@ -184,6 +217,7 @@ export const pickerOptions = [
     onClick(picker) {
       const end = new Date(new Date().toDateString())
       const start = new Date()
+
       start.setTime(end.getTime() - 3600 * 1000 * 24 * 7)
       picker.$emit('pick', [start, end])
     }
@@ -192,6 +226,7 @@ export const pickerOptions = [
     onClick(picker) {
       const end = new Date(new Date().toDateString())
       const start = new Date()
+
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
       picker.$emit('pick', [start, end])
     }
@@ -200,6 +235,7 @@ export const pickerOptions = [
     onClick(picker) {
       const end = new Date(new Date().toDateString())
       const start = new Date()
+
       start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
       picker.$emit('pick', [start, end])
     }
@@ -208,9 +244,9 @@ export const pickerOptions = [
 export function getTime(type) {
   if (type === 'start') {
     return new Date().getTime() - 3600 * 1000 * 24 * 90
-  } else {
-    return new Date(new Date().toDateString())
   }
+  return new Date(new Date().toDateString())
+
 }
 
 export function debounce(func, wait, immediate) {
@@ -218,7 +254,7 @@ export function debounce(func, wait, immediate) {
 
   const later = function () {
     // 据上一次触发时间间隔
-    const last = +new Date() - timestamp
+    const last = Number(new Date()) - timestamp
 
     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
     if (last < wait && last > 0) {
@@ -228,20 +264,27 @@ export function debounce(func, wait, immediate) {
       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
       if (!immediate) {
         result = func.apply(context, args)
-        if (!timeout) context = args = null
+        if (!timeout) {
+          context = args = null
+        }
       }
     }
   }
 
-  return function (...args) {
+  return function (...args2) {
+    let new_args = args2
+
     context = this
-    timestamp = +new Date()
+    timestamp = Number(new Date())
     const callNow = immediate && !timeout
     // 如果延时不存在，重新设定延时
-    if (!timeout) timeout = setTimeout(later, wait)
+
+    if (!timeout) {
+      timeout = setTimeout(later, wait)
+    }
     if (callNow) {
-      result = func.apply(context, args)
-      context = args = null
+      result = func.apply(context, new_args)
+      context = new_args = null
     }
 
     return result
@@ -253,6 +296,7 @@ export function deepClone(source) {
     throw new Error('error arguments', 'shallowClone')
   }
   const targetObj = source.constructor === Array ? [] : {}
+
   for (const keys in source) {
     if (source.hasOwnProperty(keys)) {
       if (source[keys] && typeof source[keys] === 'object') {

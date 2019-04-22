@@ -73,9 +73,12 @@ export default {
     },
     backToTop() {
       const start = window.pageYOffset
+
       let i = 0
+
       this.interval = setInterval(() => {
         const next = Math.floor(this.easeInOutQuad(10 * i, start, -start, 500))
+
         if (next <= this.backPosition) {
           window.scrollTo(0, this.backPosition)
           clearInterval(this.interval)
@@ -86,7 +89,7 @@ export default {
       }, 16.7)
     },
     easeInOutQuad(t, b, c, d) {
-      if ((t /= d / 2) < 1) return c / 2 * t * t + b
+      if ((t /= d / 2) < 1) {return c / 2 * t * t + b}
       return -c / 2 * (--t * (t - 2) - 1) + b
     }
   }

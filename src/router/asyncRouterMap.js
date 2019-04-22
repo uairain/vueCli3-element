@@ -18,6 +18,7 @@ const serviceEurekaManager = () => import(/* webpackChunkName: 'serviceEurekaMan
 const serviceMonitorManager = () => import(/* webpackChunkName: 'serviceMonitorManager' */ 'views/monitor/service/index')
 // 服务状态监控
 const serviceZipkinManager = () => import(/* webpackChunkName: 'serviceZipkinManager' */ 'views/monitor/zipkin/index')
+
 export const asyncRouterMap = [{
   path: '/baseManager',
   component: Layout,

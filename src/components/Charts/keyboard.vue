@@ -47,6 +47,7 @@ export default {
 
       const xAxisData = []
       const data = []
+
       for (let i = 0; i < 30; i++) {
         xAxisData.push(i + '号')
         data.push(Math.round(Math.random() * 2 + 3))

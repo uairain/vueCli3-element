@@ -28,6 +28,7 @@ export default {
       const appid = 'xxxxx'
       const redirect_uri = encodeURIComponent('xxx/redirect?redirect=' + window.location.origin + '/authredirect')
       const url = 'https://open.weixin.qq.com/connect/qrconnect?appid=' + appid + '&redirect_uri=' + redirect_uri + '&response_type=code&scope=snsapi_login#wechat_redirect'
+
       openWindow(url, thirdpart, 540, 540)
     },
     tencentHandleClick(thirdpart) {
@@ -35,6 +36,7 @@ export default {
       const client_id = 'xxxxx'
       const redirect_uri = encodeURIComponent('xxx/redirect?redirect=' + window.location.origin + '/authredirect')
       const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirect_uri
+
       openWindow(url, thirdpart, 540, 540)
     }
   }

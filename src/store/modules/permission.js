@@ -14,12 +14,12 @@ function hasPermission(menus, route) {
   if (route.authority) {
     if (menus[route.authority] !== undefined) {
       return menus[route.authority]
-    } else {
-      return false
     }
-  } else {
-    return true
+    return false
+
   }
+  return true
+
 }
 
 /**
@@ -27,8 +27,8 @@ function hasPermission(menus, route) {
  * @param asyncRouterMap
  * @param roles
  */
-function filterAsyncRouter(asyncRouterMap, menus, menuDatas) {
-  const accessedRouters = asyncRouterMap.filter(route => {
+function filterAsyncRouter(asyncRouterMap2, menus, menuDatas) {
+  const accessedRouters = asyncRouterMap2.filter(route => {
     if (hasPermission(menus, route)) {
       route.name = menuDatas[route.authority].title
       route.icon = menuDatas[route.authority].icon
@@ -39,6 +39,7 @@ function filterAsyncRouter(asyncRouterMap, menus, menuDatas) {
     }
     return false
   })
+
   return accessedRouters
 }
 
@@ -60,10 +61,12 @@ const permission = {
       return new Promise(resolve => {
         getAllMenus().then(data => {
           const menuDatas = {}
+
           for (let i = 0; i < data.length; i++) {
             menuDatas[data[i].code] = data[i]
           }
           const accessedRouters = filterAsyncRouter(asyncRouterMap, menus, menuDatas)
+
           console.log(accessedRouters)
           commit('SET_ROUTERS', accessedRouters)
           resolve()

@@ -45,6 +45,7 @@ export default {
 
     // 监听侧边栏的变化
     const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+
     sidebarElm.addEventListener('transitionend', this.__resizeHanlder)
   },
   beforeDestroy() {
@@ -56,6 +57,7 @@ export default {
     }
 
     const sidebarElm = document.getElementsByClassName('sidebar-container')[0]
+
     sidebarElm.removeEventListener('transitionend', this.__resizeHanlder)
 
     this.chart.dispose()

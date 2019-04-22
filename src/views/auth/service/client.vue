@@ -71,7 +71,8 @@ export default {
     },
     onSubmit() {
       const vals = {}
-      if (this.clients.length > 0) vals.clients = this.clients.join()
+
+      if (this.clients.length > 0) { vals.clients = this.clients.join() }
       modifyClients(this.serviceId, vals).then(() => {
         this.$emit('closeClientDialog')
         this.$notify({
@@ -86,6 +87,7 @@ export default {
       getClients(this.serviceId).then(response => {
         this.items = response.data
         const leas = []
+
         for (let i = 0; i < response.data.length; i++) {
           leas.push(response.data[i].id)
         }

@@ -31,6 +31,7 @@ export default {
     markdown2Html() {
       import('showdown').then(showdown => {
         const converter = new showdown.Converter()
+
         this.html = converter.makeHtml(this.content)
       })
     }

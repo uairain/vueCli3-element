@@ -146,23 +146,28 @@ export default {
       })
     },
     filterNode(value, data) {
-      if (!value) return true
+      if (!value) {
+        return true
+      }
       return data.label.indexOf(value) !== -1
     },
     getNodeData(data) {
       this.listQuery.menuId = data.id
       page(this.listQuery).then(response => {
         this.list = response.data.rows
-        getElementAuthority(this.groupId).then(data => {
+        getElementAuthority(this.groupId).then(data2 => {
           const obj = {}
+
           for (let i = 0; i < this.list.length; i++) {
             obj[this.list[i].id] = this.list[i]
           }
           const toggle = {}
-          for (let i = 0; i < data.data.length; i++) {
-            const id = data.data[i]
+
+          for (let i = 0; i < data2.data.length; i++) {
+            const id = data2.data[i]
+
             if (obj[id] !== undefined && toggle[id] === undefined) {
-              this.$refs.elementTable.toggleRowSelection(obj[data.data[i]])
+              this.$refs.elementTable.toggleRowSelection(obj[data2.data[i]])
               toggle[id] = true
             }
           }
@@ -176,6 +181,7 @@ export default {
     },
     handleSelectionChange(val, row) {
       let flag = true
+
       for (let i = 0; i < val.length; i++) {
         if (val[i].id === row.id) {
           addElementAuthority(this.groupId, {
@@ -197,6 +203,7 @@ export default {
       this.$emit('closeAuthorityDialog')
       const nodes = this.$refs.menuTree.getCheckedNodes()
       const ids = []
+
       for (let i = 0; i < nodes.length; i++) {
         ids.push(nodes[i].id)
       }
@@ -214,6 +221,7 @@ export default {
     initAuthoritys() {
       getMenuAuthority(this.groupId).then(data => {
         const result = []
+
         for (let i = 0; i < data.data.length; i++) {
           result.push(data.data[i].id)
         }

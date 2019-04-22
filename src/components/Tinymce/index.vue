@@ -49,6 +49,7 @@ export default {
   },
   mounted() {
     const _this = this
+
     tinymce.init({
       selector: `#${this.id}`,
       height: this.height,
@@ -122,6 +123,7 @@ export default {
           },
           onPostRender() {
             const btn = this
+
             editor.on('init', () => {
               editor.formatter.formatChanged('h2', state => {
                 btn.active(state)
@@ -137,6 +139,7 @@ export default {
           },
           onPostRender() {
             const btn = this
+
             editor.on('init', () => {
               editor.formatter.formatChanged('p', state => {
                 btn.active(state)

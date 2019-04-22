@@ -9,6 +9,7 @@ export default {
   name: 'Pane',
   data() {
     const classes = ['Pane', this.$parent.split, 'className']
+
     return {
       classes: classes.join(' '),
       percent: 50

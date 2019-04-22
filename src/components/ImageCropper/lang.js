@@ -38,4 +38,5 @@ const langBag = {
     }
   }
 }
+
 export default langBag

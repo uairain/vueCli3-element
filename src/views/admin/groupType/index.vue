@@ -279,6 +279,7 @@ export default {
             duration: 2000
           })
           const index = this.list.indexOf(row)
+
           this.list.splice(index, 1)
         })
       })
@@ -307,6 +308,7 @@ export default {
     },
     update(formName) {
       const set = this.$refs
+
       set[formName].validate(valid => {
         if (valid) {
           this.dialogFormVisible = false

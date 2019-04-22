@@ -24,7 +24,7 @@ export default {
     comment_disabled: false,
     content: '<p>我是测试数据我是测试数据</p><p><img class="wscnph" src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943" data-wscntype="image" data-wscnh="300" data-wscnw="400" data-mce-src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>"',
     content_short: '我是测试数据',
-    display_time: +new Date(),
+    display_time: Number(new Date()),
     image_uri: 'https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3',
     platforms: ['a-platform'],
     source_uri: 'https://github.com/PanJiaChen/vue-element-admin',

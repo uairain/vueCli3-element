@@ -19,6 +19,7 @@ export default {
   },
   data() {
     const classes = ['Resizer', this.split, 'className']
+
     return {
       classes: classes.join(' ')
     }

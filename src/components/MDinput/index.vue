@@ -116,8 +116,8 @@ export default {
   name: 'material-input',
   computed: {
     computedErrors() {
-      return typeof this.errorMessages === 'string'
-        ? [this.errorMessages] : this.errorMessages
+      return typeof this.errorMessages === 'string' ?
+        [this.errorMessages] : this.errorMessages
     },
     computedClasses() {
       return {

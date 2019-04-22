@@ -77,7 +77,9 @@ export default {
       }
       if (this.active) {
         let offset = 0
+
         let target = e.currentTarget
+
         if (this.split === 'vertical') {
           while (target) {
             offset += target.offsetLeft
@@ -93,6 +95,7 @@ export default {
         const currentPage = this.split === 'vertical' ? e.pageX : e.pageY
         const targetOffset = this.split === 'vertical' ? e.currentTarget.offsetWidth : e.currentTarget.offsetHeight
         const percent = Math.floor(((currentPage - offset) / targetOffset) * 10000) / 100
+
         if (percent > this.margin && percent < 100 - this.margin) {
           this.percent = percent
         }
