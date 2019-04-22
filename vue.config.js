@@ -1,6 +1,7 @@
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 var path = require('path')
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -107,7 +108,7 @@ module.exports = {
   // 它支持webPack-dev-server的所有选项
   devServer: {
     port: 9527, // 端口号
-    host: '10.8.22.39',
+    host: 'localhost',
     https: false, // https:{type:Boolean}
     open: true, // 配置自动启动浏览器
     // proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理

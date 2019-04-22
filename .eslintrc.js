@@ -17,7 +17,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // 'space-before-function-paren': 'off',
-    // 'no-new': 'off',
+    'no-new': 'off',
     'camelcase': 0,
     'import/no-webpack-loader-syntax': 0,
     "no-control-regex": 0,
@@ -77,7 +77,7 @@ module.exports = {
     "no-native-reassign": 2,//不能重写native对象
     "no-negated-in-lhs": 2,//in 操作符的左边不能有!
     "no-nested-ternary": 0,//禁止使用嵌套的三目运算
-    "no-new": 1,//禁止在使用new构造一个实例后不赋值
+    // "no-new": 1,//禁止在使用new构造一个实例后不赋值
     "no-new-func": 1,//禁止使用new Function
     "no-new-object": 2,//禁止使用new Object()
     "no-new-require": 2,//禁止使用new require
